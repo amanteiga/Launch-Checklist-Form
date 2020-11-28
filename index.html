@@ -9,6 +9,28 @@
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget">
             <!-- Fetch some planetary data -->
+        window.addEventListener("load", function(){
+            fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+                response.json().then( function(json) {
+                    const missionTarget = document.getElementById("missionTarget");
+                    // for (planet of json) 
+                    console.log(json[2]);
+                    {
+                        missionTarget.innerHTML = `
+                        <h2>Mission Destination</h2>
+                        <ol>
+                            <li>Name: ${planet.name}</li>
+                            <li>Diameter: ${planet.diameter}</li>
+                            <li>Star: ${planet.star}</li>
+                            <li>Distance from Earth: ${planet.distance}</li>
+                            <li>Number of Moons: ${planet.moons}</li>
+                        </ol>
+                        <img src="${planet.image}">
+                        `
+                    }        
+                    });
+            });
+        });
         </div> 
         <div id="launchForm">
             <form>
@@ -19,10 +41,10 @@
                     <label>Co-pilot Name <input type="text" name="copilotName"/></label>
                 </div>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
-                    <label>Fuel Level (L) <input type="text" name="fuelLevel"/></label> 
+                    <label>Fuel Level (L) <input type="number" name="fuelLevel"/></label> 
                 </div>
                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
-                    <label>Cargo Mass (kg) <input type="text" name="cargoMass"/></label>
+                    <label>Cargo Mass (kg) <input type="number" name="cargoMass"/></label>
                 </div>
                 <button id="formSubmit">Submit</button>
             </form>
