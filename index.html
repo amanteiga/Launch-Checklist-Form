@@ -9,12 +9,13 @@
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget">
             <!-- Fetch some planetary data -->
-        window.addEventListener("load", function(){
+        <script>
+        window.addEventListener("load", function() {
             fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-                response.json().then( function(json) {
+                response.json().then( function(json1) {
                     const missionTarget = document.getElementById("missionTarget");
-                    // for (planet of json) 
-                    console.log(json[2]);
+                    let planet=json1[2]; 
+                    // console.log(json[2]);
                     {
                         missionTarget.innerHTML = `
                         <h2>Mission Destination</h2>
@@ -27,10 +28,11 @@
                         </ol>
                         <img src="${planet.image}">
                         `
-                    }        
-                    });
+                    };        
+                });
             });
         });
+        </script>
         </div> 
         <div id="launchForm">
             <form>
