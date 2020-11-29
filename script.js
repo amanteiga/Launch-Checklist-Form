@@ -2,12 +2,13 @@
 
 // part one    
 window.addEventListener("load", function() {
-   let form = document.querySelector("form");
+    let form = document.querySelector("form");
+    form.addEventListener("submit", function(event) {
    let pilotNameInput = document.querySelector("input[name=pilotName]");
    let copilotNameInput = document.querySelector("input[name=copilotName]");
    let fuelLevelName = document.querySelector("input[name=fuelLevel");
    let cargoMassName = document.querySelector("input[name=cargoMass]");
-   form.addEventListener("submit", function(event) {
+   
        if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelName.value === "" || cargoMassName.value ==="") {
            alert("All fields are required!");
            event.preventDefault(); 
@@ -20,40 +21,44 @@ window.addEventListener("load", function() {
        alert("Please enter a valid Co-pilot's name!");
        event.preventDefault();
        }
-   });
-   
-});
-//part three (on index.html page)
-
-
-
-//part two 
-
-
-// function editList(){
-//    
-//     // let bottomList = (pilotNameInput.value)
-//     faultyItems.setAttribute("pilotStatus", bottomList)
-// };   
-//question for TAs: Why does pilotStatus not update?
-window.addEventListener("submit", function(){ 
-    let faultyItems = document.querySelector("id=faultyItems");
-    // let pilotStatus = document.querySelector("input[id=pilotStatus]");
-    // let copilotStatus = document.querySelector("input[id=copilotStatus");   
-    faultyItems.addEventListener("submit", function() {   
-       faultyItems.innerHTML = `
-            <ol>
-                <li id="pilotStatus"> Pilot ${pilotNameInput} is ready for launch </li>
-            </ol>
+    let faultyItems = document.getElementById("faultyItems");
+    let pilotStatus = document.getElementById("pilotStatus");
+    let copilotStatus = document.getElementById("copilotStatus");
+    let cargoStatus = document.getElementById("cargoStatus");
+    let fuelStatus = document.getElementById("fuelStatus");
+    let launchStatus = document.getElementById("launchStatus");
+    pilotStatus.innerHTML = `
+                 Pilot ${pilotNameInput.value} is ready for launch 
             `; 
-        // copilotStatus.innerHTML = `
-        //     Co-pilot ${copilotNameInput}  is ready for launch
-        //     `;
-      });
-   });
+    copilotStatus.innerHTML = `
+                Co-pilot ${copilotNameInput.value} is ready for launch
+                `;
+                console.log(fuelLevelName.value);
+    if (fuelLevelName.value < 10000) {
+        faultyItems.style.visibility = 'visible'; 
+        fuelStatus.innerHTML = `There is not enough fuel for the journey`; 
+        launchStatus.innerHTML = `Shuttle not ready for launch`;
+        launchStatus.style.color = 'red';
+        event.preventDefault();
+       event.preventDefault();
+    };
+    if (cargoMassName.value > 10000) {
+        faultyItems.style.visibility = 'visible';
+        cargoStatus.innerHTML = `There is too much mass for the shuttle to take off.`;
+        launchStatus.innerHTML = `Shuttle not ready for launch`;
+        launchStatus.style.color = 'red';
+        event.preventDefault();
+    };
+    if (cargoMassName.value <= 10000 && fuelLevelName.value >=10000) {
+        faultyItems.style.visibility = 'visible';
+        launchStatus.innerHTML = 'Shuttle is ready for launch.';
+        launchStatus.style.color = 'green';
+        event.preventDefault();
+    };
+    
+    });  
+});
 
-// let pilotNameInput = document.querySelector("input[name=pilotName]");
-// document.getElementById("[li=pilotStatus").innerHTML = `Pilot ${pilotNameInput} ready for takeoff.`;
    
 
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
